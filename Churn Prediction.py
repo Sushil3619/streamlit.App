@@ -2,7 +2,7 @@ import streamlit as st
 import numpy as np
 import pandas as pd
 import pickle
-import sklearn
+#import sklearn
 
 
 from sklearn.preprocessing import StandardScaler,LabelEncoder
@@ -37,3 +37,4 @@ if st.button('Predict'):
         st.balloons()
     else:
         st.write('The customer is not to churn')
+

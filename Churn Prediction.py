@@ -5,10 +5,10 @@ import pickle
 #import sklearn
 
 
-from sklearn.preprocessing import StandardScaler,LabelEncoder
-label_encoder= LabelEncoder ()
+#from sklearn.preprocessing import StandardScaler,LabelEncoder
+#label_encoder= LabelEncoder ()
 
-scaler= StandardScaler ()
+#scaler= StandardScaler ()
 
 st.title("Customer Churn Prediction")
 
@@ -37,4 +37,5 @@ if st.button('Predict'):
         st.balloons()
     else:
         st.write('The customer is not to churn')
+
 

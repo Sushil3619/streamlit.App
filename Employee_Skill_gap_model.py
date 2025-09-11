@@ -1,44 +1,32 @@
 import streamlit as st
 import pandas as pd
 import numpy as np
-import matplotlib.pyplot as plt
-import seaborn as sns
 
 st.title("Employee Skills Gap Prediction Model")
 
-# Input employee info
-st.header("Employee Information")
-resume_skill_level = st.slider(
-    "Resume Skill Level (0=none to 10=expert)", 0, 10, 5)
-work_performance = st.slider(
-    "Work Performance (Rating 1=low to 5=high)", 1, 5, 3)
-experience_years = st.number_input(
-    "Years of Experience", min_value=0, max_value=50, value=5)
+# Collect inputs
+st.header("Employee Details Input")
 
-# Define predicted skill gap based on inputs (mock logic)
-# Skill gap higher if resume skill low and less experience but work performance high
-skill_gap_score = max(0, 10 - resume_skill_level - (experience_years * 0.2) + (5 - work_performance))
+resume_skill = st.slider("Resume Skill Level (0=none to 10=expert)", 0, 10, 5)
+work_performance = st.slider("Work Performance (1=low to 5=high)", 1, 5, 3)
+experience_years = st.number_input("Years of Experience", 0, 50, 5)
 
-st.subheader(f"Predicted Skill Gap Score: {skill_gap_score:.2f} (0 = no gap, 10 = max gap)")
+# Skill gap calculation (mock logic)
+skill_gap = max(0, 10 - resume_skill - (experience_years * 0.15) + (5 - work_performance))
 
-# Visualize skill gap and features
+st.subheader(f"Predicted Skills Gap Score: {skill_gap:.2f} (0=no gap, 10=max gap)")
+
+# Prepare data for visualization table
 data = {
-    "Resume Skill Level": resume_skill_level,
-    "Work Performance": work_performance,
-    "Experience (years)": experience_years,
-    "Skill Gap": skill_gap_score
+    "Metric": ["Resume Skill", "Work Performance", "Experience (years)", "Skills Gap"],
+    "Value": [resume_skill, work_performance, experience_years, skill_gap]
 }
-df = pd.DataFrame(list(data.items()), columns=["Metric", "Value"])
+df = pd.DataFrame(data)
 
-sns.barplot(df["Metric"], df["Value"], color=['skyblue'])
-plt.show()
+st.write("### Skill Metrics Table")
+st.dataframe(df.style.highlight_max(axis=0))
 
+# Simple bar chart for visualization using Streamlit's built-in chart support
+st.write("### Skill Gap Visualization")
+st.bar_chart(data=df.set_index("Metric"))
 
-
-fig, ax = plt.subplots()
-bars = ax.bar(df["Metric"], df["Value"], color=['skyblue', 'lightgreen', 'orange', 'red'])
-ax.set_ylim(0, 12)
-for bar in bars:
-    yval = bar.get_height()
-    ax.text(bar.get_x() + bar.get_width()/2, yval + 0.3, round(yval, 2), ha='center', va='bottom')
-st.pyplot(fig)

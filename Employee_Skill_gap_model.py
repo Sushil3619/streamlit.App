@@ -2,6 +2,7 @@ import streamlit as st
 import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
+import seaborn as sns
 
 st.title("Employee Skills Gap Prediction Model")
 
@@ -28,6 +29,11 @@ data = {
     "Skill Gap": skill_gap_score
 }
 df = pd.DataFrame(list(data.items()), columns=["Metric", "Value"])
+
+sns.barplot(df["Metric"], df["Value"], color=['skyblue'])
+plt.show()
+
+
 
 fig, ax = plt.subplots()
 bars = ax.bar(df["Metric"], df["Value"], color=['skyblue', 'lightgreen', 'orange', 'red'])

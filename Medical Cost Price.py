@@ -1,7 +1,7 @@
 import streamlit as st
 import pandas as pd
 
-st.title("Medical Cost Price Prediction Model")
+st.title("Medical Cost Price Prediction Model", color='Yellow')
 
 # Input person details
 age = st.number_input("Age", min_value=0, max_value=120, value=30, help="Age of the person in years")
@@ -95,7 +95,7 @@ if st.button("Predict Medical Cost"):
     pred_cost = predict_medical_cost(age, sex, bmi, children, smoker, region,
                                      pre_existing_conditions, lifestyle,
                                      previous_medical_costs, insurance_coverage)
-    st.subheader(f"Predicted Medical Cost: ${pred_cost}")
+    st.subheader(f"Predicted Medical Cost:in One Years *Rs{pred_cost}")
 
     # Visualization data for cost contributors
     factors = {

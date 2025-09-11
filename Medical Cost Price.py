@@ -1,7 +1,7 @@
 import streamlit as st
 import pandas as pd
 
-st.title("Medical Cost Price Prediction Model", color='Yellow')
+st.title("Medical Cost Price Prediction Model")
 
 # Input person details
 age = st.number_input("Age", min_value=0, max_value=120, value=30, help="Age of the person in years")

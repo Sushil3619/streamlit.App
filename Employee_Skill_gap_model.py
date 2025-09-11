@@ -29,6 +29,56 @@ if submitted:
 else:
     st.write("Please fill out the form and submit.")
 
+#import streamlit as st
+import PyPDF2
+import io
+
+
+st.title("Employee Skills Gap Prediction from Resume")
+
+# Upload resume file
+uploaded_file = st.file_uploader("Upload your resume (PDF or TXT)", type=["pdf", "txt"])
+
+def extract_text_from_pdf(file):
+    pdf_reader = PyPDF2.PdfReader(file)
+    text = ""
+    for page in pdf_reader.pages:
+        text += page.extract_text()
+    return text
+
+def analyze_resume(text):
+    # Mock analysis: count keywords related to skills
+    skill_keywords = ["python", "machine learning", "data", "excel", "communication", "management"]
+    skill_count = sum(text.lower().count(word) for word in skill_keywords)
+    # Mock skill gap score inversely proportional to skills count
+    skill_gap = max(0, 10 - skill_count)
+    return skill_gap
+
+if uploaded_file is not None:
+    if uploaded_file.type == "application/pdf":
+        # Read PDF file
+        raw_text = extract_text_from_pdf(uploaded_file)
+    else:
+        # Read txt file
+        raw_text = str(uploaded_file.read(), "utf-8")
+
+    st.write("Resume Text Extracted:")
+    st.write(raw_text[:1000] + "...")  # show excerpt
+
+    skill_gap_score = analyze_resume(raw_text)
+    st.subheader(f"Predicted Skills Gap Score: {skill_gap_score:.2f} (0 = no gap, 10 = max gap)")
+
+    # Visualization of skill gap
+    data = {
+        "Metric": ["Skill Gap"],
+        "Value": [skill_gap_score]
+    }
+    df = pd.DataFrame(data)
+    st.bar_chart(df.set_index("Metric"))
+else:
+    st.write("Please upload a resume file to analyze.")
+
+
 
 # Collect inputs
 st.header("Employee Details Input")

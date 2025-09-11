@@ -59,3 +59,5 @@ if uploaded_file is not None:
         st.info("Please fill employee info and submit to compute final skill gap.")
 else:
     st.info("Please upload a resume (PDF or TXT) to analyze.")
+
+

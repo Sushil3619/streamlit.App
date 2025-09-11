@@ -29,7 +29,7 @@ lifestyle = st.multiselect(
     help="Select lifestyle factors relevant to the person"
 )
 
-previous_medical_costs = st.number_input("Previous Medical Costs (USD)", min_value=0, max_value=1000000, value=0,
+previous_medical_costs = st.number_input("Previous Medical Costs (Rupees)", min_value=0, max_value=1000000, value=0,
                                          help="Total past recorded medical expenses")
 insurance_coverage = st.selectbox(
     "Insurance Coverage Factor",

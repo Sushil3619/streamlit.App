@@ -51,10 +51,10 @@ def predict_medical_cost(age, sex, bmi, children, smoker, region,
         cost += 800
 
     region_factors = {
-        "Southwest": 150,
-        "Southeast": 250,
-        "Northwest": 350,
-        "Northeast": 450
+        "West": 150,
+        "East": 250,
+        "North-Indian": 350,
+        "South-Indian": 450
     }
     cost += region_factors.get(region, 0)
 
